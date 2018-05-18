@@ -8,16 +8,22 @@ import Jokes from './jokes/Jokes';
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
+    return <div className="App">
         <header className="App-header">
           <h1>Welcome User!</h1>
+          {localStorage.getItem("token") && <button onClick={this.signout}>
+              Sign Out
+            </button>}
         </header>
-        <Route path='/signup' component={Signup} />
-        <Route path='/signin' component={Signin} />
-        <Route path='/jokes' component={Jokes} />
-      </div>
-    );
+        <Route path="/signup" component={Signup} />
+        <Route path="/signin" component={Signin} />
+        <Route path="/jokes" component={Jokes} />
+      </div>;
+  }
+
+  signout = () => {
+    localStorage.removeItem('token');
+    this.props.history.push('/signin');
   }
 }
 
